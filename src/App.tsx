@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { MainLayout, SectionContainer } from './components';
+import { SectionIdEnum } from './types';
+import { AboutSection } from './sections';
 
-function App() {
+const sections = [
+  {
+    sectionId: SectionIdEnum.about,
+    component: <AboutSection />,
+  },
+  {
+    sectionId: SectionIdEnum.FAQ,
+    component: <AboutSection />,
+  },
+  {
+    sectionId: SectionIdEnum.pricing,
+    component: <AboutSection />,
+  },
+];
+
+export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainLayout>
+      {sections.map(({ component, sectionId }) => {
+        return (
+          <SectionContainer sectionId={sectionId} key={sectionId}>
+            {component}
+          </SectionContainer>
+        );
+      })}
+    </MainLayout>
   );
-}
-
-export default App;
+};
